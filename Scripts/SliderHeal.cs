@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class SliderHeal : MonoBehaviour
 {
-    public static SliderHeal instanse;
-
     [SerializeField] private Slider _healthbar;
 
     [SerializeField] private float _maxHealth;
@@ -19,13 +17,7 @@ public class SliderHeal : MonoBehaviour
     private float _smothing = 5;
 
     private void Awake()
-    {
-
-        if (instanse == null)
-        {
-            instanse = this;
-        }
-
+    {  
         _health = _maxHealth;
         _healthbar.maxValue = _maxHealth;
         _healthbar.value = _health;
@@ -36,10 +28,12 @@ public class SliderHeal : MonoBehaviour
         ChangeHealth();
     }
 
-    public void TakeDamege()
+    private void TakeDamege()
     {
-        _health -= _damage;
+        GameObject.Find("Player").GetComponent<Player>().ChangeHealthInfo();
 
+        _health -= _damage;
+        
         if (_health < _minHealth)
         {
             _health = _minHealth;
@@ -47,10 +41,12 @@ public class SliderHeal : MonoBehaviour
 
     }
 
-    public void Heal()
+    private void Heal()
     {
-        _health += _heal;
+        GameObject.Find("Player").GetComponent<Player>().ChangeHealthInfo();
 
+        _health += _heal;
+       
         if (_health > _maxHealth)
         {
             _health = _maxHealth;
@@ -58,12 +54,13 @@ public class SliderHeal : MonoBehaviour
 
     }
    
-    public void ChangeHealth()
+    private void ChangeHealth()
     {
 
         if (_healthbar.value != _health)
         {
             _healthbar.value = Mathf.Lerp(_healthbar.value, _health, _smothing * Time.deltaTime);
+           
         }
 
     }

@@ -1,18 +1,34 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 public class Player : MonoBehaviour
 {
-   private void Heal()
+    [SerializeField]  private GameObject _panel;
+   
+    private void Start()
     {
-        SliderHeal.instanse.Heal();
-        SliderHeal.instanse.ChangeHealth();
+        _panel.SetActive(false);
     }
-    
-    private void Damage()
+
+    public void ChangeHealthInfo()
     {
-        SliderHeal.instanse.TakeDamege();
-        SliderHeal.instanse.ChangeHealth();
+        StartCoroutine(nameof(ShowText));
+    }
+
+   private IEnumerator ShowText()
+    {
+        _panel.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        _panel.SetActive(false);
+
+        StopShowingText();
+    }
+
+    private void StopShowingText()
+    {
+        StopCoroutine(nameof(ShowText));
     }
 }
