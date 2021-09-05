@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthbar: {fileID: 1701584239}
-  _maxHealth: 100
+  _player: {fileID: 2116782535}
 --- !u!4 &947747546
 Transform:
   m_ObjectHideFlags: 0

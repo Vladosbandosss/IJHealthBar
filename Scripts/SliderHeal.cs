@@ -6,21 +6,20 @@ using UnityEngine.UI;
 public class SliderHeal : MonoBehaviour
 {
     [SerializeField] private Slider _healthbar;
-
-    [SerializeField] private float _maxHealth;
-
+    [SerializeField] private Player _player;
+   
     private float _health;
-    private float _minHealth = 0;
+    private float _minHealth;
     private float _damage = 10f;
     private float _heal = 10f;
-
     private float _smothing = 5;
 
     private void Awake()
     {  
-        _health = _maxHealth;
-        _healthbar.maxValue = _maxHealth;
+        _health = _player.currentHealth;
+        _healthbar.maxValue = _player.maxHealth;
         _healthbar.value = _health;
+        _minHealth = _player.minHealth;
     }
 
     private void Update()
@@ -47,9 +46,9 @@ public class SliderHeal : MonoBehaviour
 
         _health += _heal;
        
-        if (_health > _maxHealth)
+        if (_health > _player.maxHealth)
         {
-            _health = _maxHealth;
+            _health = _player.maxHealth;
         }
 
     }
